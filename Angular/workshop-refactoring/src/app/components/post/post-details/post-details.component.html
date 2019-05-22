@@ -1,0 +1,18 @@
+<section id="viewComments">
+  <app-post-info *ngIf="(post$ | async) as post" [post]="post" [desc]="post.description">
+  </app-post-info>
+  <div class="post post-content">
+    <app-comment-create 
+    *ngIf="(post$ | async) as post" 
+    [postId]="post._id" 
+    (postCommentEmitter)="loadComments()">
+
+    </app-comment-create>
+  </div>
+  <app-comment-info 
+  *ngFor="let commentInfo of (comments | async)" 
+  [commentInfo]="commentInfo"
+  (deleteCommentEmitter)="deleteComment($event)">
+
+  </app-comment-info>
+</section>
